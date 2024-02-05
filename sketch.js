@@ -10,16 +10,16 @@ const make2DArray = (rows, cols) => {
 };
 
 let grid;
-let w = 5;
+let w = 10;
 let cols, rows;
 let matrix;
 
 function setup() {
-  createCanvas(700, 700);
-  matrix = select('#brushSize').value();
-  select('#brushSize').input(() => {
-    matrix = select('#brushSize').value();
-  })
+  createCanvas(900, 900);
+  matrix = select("#brushSize").value();
+  select("#brushSize").input(() => {
+    matrix = select("#brushSize").value();
+  });
   cols = width / w + 1;
   rows = height / w + 1;
   grid = make2DArray(rows, cols);
@@ -36,7 +36,7 @@ const brushStroke = () => {
   return brushStroke;
 };
 
-const brushStrokeSize = brushStroke(); 
+const brushStrokeSize = brushStroke();
 
 function mouseMoved() {
   let row = floor(mouseX / w);
@@ -44,12 +44,19 @@ function mouseMoved() {
   if (col >= 0 && col < cols - 1 && row >= 0 && row <= rows - 1) {
     grid[row][col] = 1;
   }
-  
+
   let ex = floor(matrix / 2);
   for (let i = -ex; i <= ex; i++) {
     for (let j = -ex; j <= ex; j++) {
-      if (col + i >= 0 && col + i < cols - 1 && row + j >= 0 && row + j <= rows - 1) {
-        grid[row + j][col + i] = 1;
+      if (random(1) < 0.1) {
+        if (
+          col + i >= 0 &&
+          col + i < cols - 1 &&
+          row + j >= 0 &&
+          row + j <= rows - 1
+        ) {
+          grid[row + j][col + i] = 1;
+        }
       }
     }
   }
