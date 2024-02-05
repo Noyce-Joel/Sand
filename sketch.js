@@ -14,7 +14,8 @@ let w = 20;
 let cols, rows;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(700, 700);
+
   cols = width / w;
   rows = height / w;
   grid = make2DArray(rows, cols);
@@ -24,20 +25,19 @@ function setup() {
       grid[i][j] = 0;
     }
   }
-  
 }
 
-function mouseDragged() {
+function mouseMoved() {
   let row = floor(mouseX / w);
   let col = floor(mouseY / w);
-  if (col >=0 && col < cols - 1 && row >= 0 && row <= rows - 1) {
+  if (col >= 0 && col < cols - 1 && row >= 0 && row <= rows - 1) {
     grid[row][col] = 1;
   }
-  
 }
 
 function draw() {
-  background(0)
+  background(0);
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       noStroke();
@@ -45,15 +45,16 @@ function draw() {
         fill(255);
         let x = i * w;
         let y = j * w;
-        square(x, y, w);
+        circle(x, y, w);
       }
-      
     }
   }
 
   let nextGrid = make2DArray(rows, cols);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
+      let name;
+
       let state = grid[i][j];
       if (state === 1) {
         let below = grid[i][j + 1];
@@ -63,6 +64,7 @@ function draw() {
           belowLeft = grid[i - dir][j + 1];
           belowRight = grid[i + dir][j + 1];
         }
+
         if (below === 0) {
           nextGrid[i][j + 1] = 1;
         } else if (belowRight === 0) {
@@ -75,5 +77,6 @@ function draw() {
       }
     }
   }
+
   grid = nextGrid;
 }

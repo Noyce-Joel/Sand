@@ -8,7 +8,12 @@ html, body {
   align-items: center;
   background-color: #000000;
   overflow: visible;
+
 }
 canvas {
   display: block;
+  height: 700px;
+  width: 700px;
+  border: 1px solid #ffffff;
+  border-radius: 50%
 }
