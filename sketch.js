@@ -10,14 +10,18 @@ const make2DArray = (rows, cols) => {
 };
 
 let grid;
-let w = 20;
+let w = 5;
 let cols, rows;
+let matrix;
 
 function setup() {
   createCanvas(700, 700);
-
-  cols = width / w;
-  rows = height / w;
+  matrix = select('#brushSize').value();
+  select('#brushSize').input(() => {
+    matrix = select('#brushSize').value();
+  })
+  cols = width / w + 1;
+  rows = height / w + 1;
   grid = make2DArray(rows, cols);
 
   for (let i = 0; i < rows; i++) {
@@ -27,17 +31,33 @@ function setup() {
   }
 }
 
+const brushStroke = () => {
+  let brushStroke = 10;
+  return brushStroke;
+};
+
+const brushStrokeSize = brushStroke(); 
+
 function mouseMoved() {
   let row = floor(mouseX / w);
   let col = floor(mouseY / w);
   if (col >= 0 && col < cols - 1 && row >= 0 && row <= rows - 1) {
     grid[row][col] = 1;
   }
+  
+  let ex = floor(matrix / 2);
+  for (let i = -ex; i <= ex; i++) {
+    for (let j = -ex; j <= ex; j++) {
+      if (col + i >= 0 && col + i < cols - 1 && row + j >= 0 && row + j <= rows - 1) {
+        grid[row + j][col + i] = 1;
+      }
+    }
+  }
 }
 
 function draw() {
   background(0);
-
+  ellipse(width / 2, height / 2, accelerationY);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       noStroke();
