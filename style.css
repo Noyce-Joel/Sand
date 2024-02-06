@@ -7,15 +7,48 @@ html, body {
   align-items: center;
   background-color: #000000;
   overflow: visible;
-
+  font-family: 'Courier New', Courier;
 }
 canvas {
-  height: 100%;
-  width: 100%;
+  
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   border-radius: 20px;
   border: 1px solid #ffffff;
   padding: 2px
+}
+
+.title{
+  color: #ffffff;
+  font-size: 40px;
+  margin-right: 10px;
+
+  
+
+}
+
+.instructions{
+  color: #ffffff;
+  font-size: 25px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between
+  
+
+}
+
+.brush-label{
+  color: #ffffff;
+  font-size: 20px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 50px
+}
+
+.brush-label label{
+  padding-left: 5px
 }
